@@ -201,14 +201,14 @@ class Content extends React.Component {
       // to check both orientations here. (2017/10/31)
       if (current) {
         if (
-          (startContainer == current.startContainer &&
-            startOffset == current.startOffset &&
-            endContainer == current.endContainer &&
-            endOffset == current.endOffset) ||
-          (startContainer == current.endContainer &&
-            startOffset == current.endOffset &&
-            endContainer == current.startContainer &&
-            endOffset == current.startOffset)
+          (startContainer === current.startContainer &&
+            startOffset === current.startOffset &&
+            endContainer === current.endContainer &&
+            endOffset === current.endOffset) ||
+          (startContainer === current.endContainer &&
+            startOffset === current.endOffset &&
+            endContainer === current.startContainer &&
+            endOffset === current.startOffset)
         ) {
           return
         }
@@ -329,7 +329,7 @@ class Content extends React.Component {
     // programmatically while updating selection.
     if (
       this.tmp.isUpdatingSelection &&
-      (handler == 'onSelect' || handler == 'onBlur' || handler == 'onFocus')
+      (handler === 'onSelect' || handler === 'onBlur' || handler === 'onFocus')
     ) {
       return
     }
@@ -339,7 +339,7 @@ class Content extends React.Component {
     // cases we don't need to trigger any changes, since our internal model is
     // already up to date, but we do want to update the native selection again
     // to make sure it is in sync. (2017/10/16)
-    if (handler == 'onSelect') {
+    if (handler === 'onSelect') {
       const { editor } = this.props
       const { value } = editor
       const { selection } = value
@@ -355,13 +355,13 @@ class Content extends React.Component {
 
     // Don't handle drag and drop events coming from embedded editors.
     if (
-      handler == 'onDragEnd' ||
-      handler == 'onDragEnter' ||
-      handler == 'onDragExit' ||
-      handler == 'onDragLeave' ||
-      handler == 'onDragOver' ||
-      handler == 'onDragStart' ||
-      handler == 'onDrop'
+      handler === 'onDragEnd' ||
+      handler === 'onDragEnter' ||
+      handler === 'onDragExit' ||
+      handler === 'onDragLeave' ||
+      handler === 'onDragOver' ||
+      handler === 'onDragStart' ||
+      handler === 'onDrop'
     ) {
       const closest = event.target.closest('[data-slate-editor]')
 
@@ -373,18 +373,18 @@ class Content extends React.Component {
     // Some events require being in editable in the editor, so if the event
     // target isn't, ignore them.
     if (
-      handler == 'onBeforeInput' ||
-      handler == 'onBlur' ||
-      handler == 'onCompositionEnd' ||
-      handler == 'onCompositionStart' ||
-      handler == 'onCopy' ||
-      handler == 'onCut' ||
-      handler == 'onFocus' ||
-      handler == 'onInput' ||
-      handler == 'onKeyDown' ||
-      handler == 'onKeyUp' ||
-      handler == 'onPaste' ||
-      handler == 'onSelect'
+      handler === 'onBeforeInput' ||
+      handler === 'onBlur' ||
+      handler === 'onCompositionEnd' ||
+      handler === 'onCompositionStart' ||
+      handler === 'onCopy' ||
+      handler === 'onCut' ||
+      handler === 'onFocus' ||
+      handler === 'onInput' ||
+      handler === 'onKeyDown' ||
+      handler === 'onKeyUp' ||
+      handler === 'onPaste' ||
+      handler === 'onSelect'
     ) {
       if (!this.isInEditor(event.target)) {
         return

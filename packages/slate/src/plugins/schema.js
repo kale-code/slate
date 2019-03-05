@@ -359,7 +359,7 @@ function validateNodes(node, rule, rules = []) {
   if (node.nodes == null) return
 
   const children = node.nodes
-  const defs = rule.nodes != null ? rule.nodes.slice() : []
+  const defs = rule.nodes != null? rule.nodes.slice() : []
   let count = 0
   let lastCount = 0
   let min = null
@@ -398,7 +398,7 @@ function validateNodes(node, rule, rules = []) {
     }
   }
 
-  if (rule.nodes != null) {
+  if (rule.nodes !== null) {
     nextDef()
   }
 
@@ -410,7 +410,7 @@ function validateNodes(node, rule, rules = []) {
 
     if (err) return err
 
-    if (rule.nodes != null) {
+    if (rule.nodes !== null) {
       if (!def) {
         return fail('child_unknown', { rule, node, child, index })
       }
@@ -422,7 +422,7 @@ function validateNodes(node, rule, rules = []) {
           // Since we want to report overflow on last matching child we don't
           // immediately check for count > max, but instead do so once we find
           // a child that doesn't match.
-          if (max != null && count - 1 > max) {
+          if (max != null&& count - 1 > max) {
             rewind()
             return fail('child_max_invalid', {
               rule,
@@ -482,7 +482,7 @@ function validateNodes(node, rule, rules = []) {
 
           // Otherwise either we exhausted the last group, in which case it's
           // an unknown child, ...
-          if (max != null && count > max) {
+          if (max != null&& count > max) {
             return fail('child_unknown', { rule, node, child, index })
           }
 
@@ -500,7 +500,7 @@ function validateNodes(node, rule, rules = []) {
 
   // Since we want to report overflow on last matching child we don't
   // immediately check for count > max, but do so after processing all nodes.
-  if (max != null && count > max) {
+  if (max != null&& count > max) {
     return fail('child_max_invalid', {
       rule,
       node,
@@ -511,7 +511,7 @@ function validateNodes(node, rule, rules = []) {
     })
   }
 
-  if (rule.nodes != null) {
+  if (rule.nodes !== null) {
     do {
       if (count < min) {
         return fail('child_min_invalid', {

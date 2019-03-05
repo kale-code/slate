@@ -132,7 +132,7 @@ function AfterPlugin(options = {}) {
 
         // If the text was successfully inserted, and the selection had marks
         // on it, unset the selection's marks.
-        if (selection.marks && value.document != editor.value.document) {
+        if (selection.marks && value.document !== editor.value.document) {
           editor.select({ marks: null })
         }
 
@@ -312,11 +312,11 @@ function AfterPlugin(options = {}) {
     // needs to account for the selection's content being deleted.
     if (
       isDraggingInternally &&
-      selection.end.key == target.end.key &&
+      selection.end.key === target.end.key &&
       selection.end.offset < target.end.offset
     ) {
       target = target.moveForward(
-        selection.start.key == selection.end.key
+        selection.start.key === selection.end.key
           ? 0 - selection.end.offset + selection.start.offset
           : 0 - selection.end.offset
       )
@@ -328,7 +328,7 @@ function AfterPlugin(options = {}) {
 
     editor.select(target)
 
-    if (type == 'text' || type == 'html') {
+    if (type === 'text' || type === 'html') {
       const { anchor } = target
       let hasVoidParent = document.hasVoidParent(anchor.key, editor)
 
@@ -352,7 +352,7 @@ function AfterPlugin(options = {}) {
       }
     }
 
-    if (type == 'fragment') {
+    if (type === 'fragment') {
       editor.insertFragment(fragment)
     }
 
@@ -438,19 +438,19 @@ function AfterPlugin(options = {}) {
     // Get the text information.
     const { text } = leaf
     let { textContent } = anchorNode
-    const isLastText = node == lastText
-    const isLastLeaf = leaf == lastLeaf
+    const isLastText = node === lastText
+    const isLastLeaf = leaf === lastLeaf
     const lastChar = textContent.charAt(textContent.length - 1)
 
     // COMPAT: If this is the last leaf, and the DOM text ends in a new line,
     // we will have added another new line in <Leaf>'s render method to account
     // for browsers collapsing a single trailing new lines, so remove it.
-    if (isLastText && isLastLeaf && lastChar == '\n') {
+    if (isLastText && isLastLeaf && lastChar === '\n') {
       textContent = textContent.slice(0, -1)
     }
 
     // If the text is no different, abort.
-    if (textContent == text) return next()
+    if (textContent === text) return next()
 
     debug('onInput', { event })
 
@@ -585,7 +585,7 @@ function AfterPlugin(options = {}) {
       const isPreviousInVoid =
         previousText && document.hasVoidParent(previousText.key, editor)
 
-      if (hasVoidParent || isPreviousInVoid || startText.text == '') {
+      if (hasVoidParent || isPreviousInVoid || startText.text === '') {
         event.preventDefault()
         return editor.moveFocusBackward()
       }
@@ -596,7 +596,7 @@ function AfterPlugin(options = {}) {
       const isNextInVoid =
         nextText && document.hasVoidParent(nextText.key, editor)
 
-      if (hasVoidParent || isNextInVoid || startText.text == '') {
+      if (hasVoidParent || isNextInVoid || startText.text === '') {
         event.preventDefault()
         return editor.moveFocusForward()
       }
@@ -648,11 +648,11 @@ function AfterPlugin(options = {}) {
     const transfer = getEventTransfer(event)
     const { type, fragment, text } = transfer
 
-    if (type == 'fragment') {
+    if (type === 'fragment') {
       editor.insertFragment(fragment)
     }
 
-    if (type == 'text' || type == 'html') {
+    if (type === 'text' || type === 'html') {
       if (!text) return next()
       const { document, selection, startBlock } = value
       if (editor.isVoid(startBlock)) return next()
@@ -714,10 +714,10 @@ function AfterPlugin(options = {}) {
     if (
       anchorBlock &&
       !editor.isVoid(anchorBlock) &&
-      anchor.offset == 0 &&
+      anchor.offset === 0 &&
       focusBlock &&
       editor.isVoid(focusBlock) &&
-      focus.offset != 0
+      focus.offset !== 0
     ) {
       range = range.setFocus(focus.setOffset(0))
     }
@@ -728,7 +728,7 @@ function AfterPlugin(options = {}) {
     if (
       anchorInline &&
       !editor.isVoid(anchorInline) &&
-      anchor.offset == anchorText.text.length
+      anchor.offset === anchorText.text.length
     ) {
       const block = document.getClosestBlock(anchor.key)
       const nextText = block.getNextText(anchor.key)
@@ -738,7 +738,7 @@ function AfterPlugin(options = {}) {
     if (
       focusInline &&
       !editor.isVoid(focusInline) &&
-      focus.offset == focusText.text.length
+      focus.offset === focusText.text.length
     ) {
       const block = document.getClosestBlock(focus.key)
       const nextText = block.getNextText(focus.key)
